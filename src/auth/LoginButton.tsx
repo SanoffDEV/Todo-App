@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 export const LoginButton = () => {
   return (
     <div>
-      <Button>
+      <Button variant={"ghost"} className="border border-slate-300">
         <a
           href="/login
         "
