@@ -13,6 +13,7 @@ export default {
       fontFamily: {
         sans: "var(--font-geist-sans)",
       },
+      plugins: [require("tailwind-scrollbar")],
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
