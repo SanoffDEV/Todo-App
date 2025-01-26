@@ -1,9 +1,10 @@
 "use client";
-import { create } from "zustand";
-import { useState } from "react";
-import { CreateTodoMenu } from "@/component/CreateTodoMenu";
+
+import React, { useState } from "react";
+import { CreateTodoMenu } from "@/_component/CreateTodoMenu";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
+import { useMenuStore } from "@/_component/menu.store";
 
 export const CreateTodo = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

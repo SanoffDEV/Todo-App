@@ -22,6 +22,14 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "_component/CreateTodoMenu.jsx",
+    "pages/api/post/todo.actions.ts",
+    "src/lib/safe.actions.ts"
+  ],
   "exclude": ["node_modules"]
 }

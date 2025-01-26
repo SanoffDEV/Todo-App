@@ -1,0 +1,37 @@
+  <Popover>
+            <FormLabel htmlFor="date">Date</FormLabel>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-[280px] justify-start text-left font-normal",
+                  !date && "text-muted-foreground"
+                )}
+              >
+                <CalendarIcon />
+                {date ? (
+                  format(date, "PPP")
+                ) : (
+                  <span>Pick a date for your todo</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={(selectedDate) => {
+                  const currentDate = new Date();
+                  if (!selectedDate) {
+                    alert("No date selected");
+                    return;
+                  }
+                  if (selectedDate > currentDate) {
+                    setDate(selectedDate);
+                  } else {
+                    alert("Date must be in the future");
+                  }
+                }}
+              />
+            </PopoverContent>
+          </Popover>
