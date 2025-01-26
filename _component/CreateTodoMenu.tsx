@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
@@ -20,13 +21,15 @@ import {
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 import { todoSchema, TodoType } from "@/pages/api/post/todo.shema";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
+import { ToastAction } from "@radix-ui/react-toast";
+import { session } from "@/pages/api/auth/getServerSession";
+import { LoginButton } from "@/src/auth/LoginButton";
 
 export type TodoFormProps = {
   defaultValues?: TodoType;
@@ -34,6 +37,7 @@ export type TodoFormProps = {
 };
 
 export function CreateTodoMenu(props: TodoFormProps) {
+  const { toast } = useToast();
   const form = useZodForm({
     schema: todoSchema,
     defaultValues: props.defaultValues,
@@ -43,7 +47,6 @@ export function CreateTodoMenu(props: TodoFormProps) {
 
   const mutation = useMutation({
     mutationFn: async (values: TodoType) => {
-      console.log("Sending values:", values); // Log des valeurs envoyées
       const response = await fetch("/api/post/create", {
         method: "POST",
         headers: {
@@ -52,7 +55,7 @@ export function CreateTodoMenu(props: TodoFormProps) {
         body: JSON.stringify({ ...values, date }),
       });
 
-      console.log("Response status:", response.status); // Log du statut de la réponse
+      console.log("Response status:", response.status);
 
       if (!response.ok) {
         throw new Error("Failed to create Todo");
@@ -62,12 +65,16 @@ export function CreateTodoMenu(props: TodoFormProps) {
     },
     onError: (error) => {
       console.error("Error during mutation:", error);
-      toast.error("Failed to create Todo.");
     },
     onSuccess: () => {
-      toast.success("Todo created successfully!");
       form.reset();
       setDate(null);
+      toast({
+        title: "Todo Created!",
+        description: "Your todo has been successfully created.",
+        duration: 1500,
+        action: <ToastAction altText="Close">Close</ToastAction>,
+      });
     },
   });
 
@@ -81,9 +88,10 @@ export function CreateTodoMenu(props: TodoFormProps) {
         <Form
           form={form}
           onSubmit={async (values) => {
+            // If the form is valid, create the Todo
             await mutation.mutateAsync({
               ...values,
-              date, // Assurez-vous d'ajouter la date sélectionnée
+              date,
             });
           }}
         >
@@ -109,7 +117,9 @@ export function CreateTodoMenu(props: TodoFormProps) {
             name="description"
             render={({ field }) => (
               <FormItem className="flex flex-col space-y-1.5">
-                <FormLabel htmlFor="description">Description</FormLabel>
+                <FormLabel htmlFor="description" className="mt-4">
+                  Description
+                </FormLabel>
                 <Textarea
                   id="description"
                   placeholder="Description of your Todo"
@@ -128,7 +138,7 @@ export function CreateTodoMenu(props: TodoFormProps) {
             render={({ field }) => (
               <FormItem className="flex flex-col space-y-1.5">
                 <Popover>
-                  <FormLabel htmlFor="date" className="text-black">
+                  <FormLabel htmlFor="date" className="text-black mt-4">
                     Date
                   </FormLabel>
                   <PopoverTrigger asChild>
@@ -137,7 +147,11 @@ export function CreateTodoMenu(props: TodoFormProps) {
                       className="w-[280px] justify-start text-left font-normal"
                     >
                       <CalendarIcon />
-                      {date ? format(date, "PPP") : <span>Pick a date</span>}
+                      {date ? (
+                        format(date, "PPP")
+                      ) : (
+                        <span>Pick a date for your Todo</span>
+                      )}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0">
@@ -154,7 +168,14 @@ export function CreateTodoMenu(props: TodoFormProps) {
                           setDate(selectedDate);
                           field.onChange(selectedDate);
                         } else {
-                          alert("Date must be in the future");
+                          toast({
+                            title: "Error",
+                            description: "Date must be in the future",
+                            duration: 1000,
+                            action: (
+                              <ToastAction altText="Close">Close</ToastAction>
+                            ),
+                          });
                         }
                       }}
                     />
@@ -169,7 +190,7 @@ export function CreateTodoMenu(props: TodoFormProps) {
             name="hours"
             render={({ field }) => (
               <FormItem className="flex flex-col space-y-1.5">
-                <FormLabel htmlFor="hours" className="text-sm font-medium">
+                <FormLabel htmlFor="hours" className="text-sm font-medium mt-4">
                   Hours
                 </FormLabel>
                 <Input
@@ -184,7 +205,7 @@ export function CreateTodoMenu(props: TodoFormProps) {
             )}
           />
 
-          <Button className="w-full mt-4" type="submit">
+          <Button type="submit" className="mt-4 w-full" variant={"outline"}>
             Create Todo
           </Button>
         </Form>

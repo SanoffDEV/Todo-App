@@ -19,7 +19,7 @@ export default async function handler(
     }
 
     // Assurez-vous que les champs requis sont présents
-    if (!name || !description || !date || !hours) {
+    if (!name || !description || !date) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 

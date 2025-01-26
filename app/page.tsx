@@ -15,9 +15,17 @@ export default async function Home() {
           <LoginButton />
         </div>
       )}
-      <div className="absolute top-5 left-7">
-        <CreateTodo />
-      </div>
+      {session ? (
+        <div className="absolute top-5 left-7">
+          <CreateTodo />
+        </div>
+      ) : (
+        <div className="">
+          <h1 className="flex items-center justify-center text-center text-xl  ">
+            Your Best Todo App
+          </h1>
+        </div>
+      )}
     </div>
   );
 }

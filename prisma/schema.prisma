@@ -29,8 +29,8 @@ model Todo {
   id          String   @id @default(cuid())       // Identifiant unique
   name        String   @db.VarChar(255)          // Nom limité à 255 caractères
   description String   @db.Text                  // Description illimitée
-  hours       String   @db.VarChar(5)            // Format "HH:MM" pour les heures
-  date        DateTime                           // Date et heure de la tâche
+  hours       String   @db.VarChar(5)             // Format "HH:MM" pour les heures
+  date        DateTime                      // Date et heure de la tâche
   userId      String                             // Identifiant de l'utilisateur associé
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Relation avec User
 
