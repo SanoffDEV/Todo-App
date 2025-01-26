@@ -1,7 +1,7 @@
-import { DropDownMenu } from "@/_component/DropDownMenu";
+import { DropDownMenu } from "@/src/utils/components/TodoComp/DropDownMenu";
 import { authConfig } from "@/pages/api/auth/[...nextauth]";
 import { LoginButton } from "@/src/auth/LoginButton";
-import { CreateTodo } from "@/src/ui/theme/components/CreateTodo";
+import { CreateTodo } from "@/src/utils/components/TodoComp/CreateTodo";
 import { getServerSession } from "next-auth";
 
 export default async function Home() {

@@ -3,7 +3,7 @@ import {
   CardContent,
   CardDescription,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/src/components/ui/card";
 import { authConfig } from "@/pages/api/auth/[...nextauth]";
 import { GithubButton } from "@/src/auth/GithubButton";
 import { GoogleButton } from "@/src/auth/GoogleButton";
