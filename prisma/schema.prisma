@@ -1,0 +1,100 @@
+// Définition du datasource et du client Prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Modèle utilisateur
+model User {
+  id            String          @id @default(cuid()) // Identifiant unique généré automatiquement
+  name          String?                           // Nom optionnel
+  email         String          @unique           // Email unique
+  emailVerified DateTime?                         // Email vérifié
+  image         String?                           // Image de profil optionnelle
+  accounts      Account[]                         // Relations avec le modèle Account
+  sessions      Session[]                         // Relations avec le modèle Session
+  Authenticator Authenticator[]                   // Relation pour WebAuthn (optionnel)
+  todos         Todo[]                            // Tous les todos associés à l'utilisateur
+
+  createdAt     DateTime @default(now())          // Date de création
+  updatedAt     DateTime @updatedAt               // Date de mise à jour automatique
+}
+
+// Modèle des tâches (todos)
+model Todo {
+  id          String   @id @default(cuid())       // Identifiant unique
+  name        String   @db.VarChar(255)          // Nom limité à 255 caractères
+  description String   @db.Text                  // Description illimitée
+  hours       String   @db.VarChar(5)             // Format "HH:MM" pour les heures
+  date        DateTime       
+  Done        Boolean                // Date et heure de la tâche
+  userId      String                             // Identifiant de l'utilisateur associé
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Relation avec User
+
+  createdAt   DateTime @default(now())           // Date de création
+  updatedAt   DateTime @updatedAt                // Mise à jour automatique
+
+  @@index([userId])                              // Index pour des recherches rapides basées sur userId
+}
+
+// Modèle des comptes utilisateurs
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())             // Date de création
+  updatedAt DateTime @updatedAt                  // Mise à jour automatique
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])            // Clé composite pour éviter les doublons
+}
+
+// Modèle des sessions
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt    DateTime @default(now())          // Date de création
+  updatedAt    DateTime @updatedAt               // Mise à jour automatique
+}
+
+// Modèle pour les jetons de vérification (par exemple, pour les emails)
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])                      // Clé composite pour identifier les jetons
+}
+
+// Modèle pour WebAuthn (optionnel)
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])                   // Clé composite pour éviter les doublons
+}
