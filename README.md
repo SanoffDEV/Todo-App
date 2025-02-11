@@ -1,4 +1,4 @@
-This is a simple todo app made with Next.js and Tailwind CSS.
+### This is a simple todo app made with Next.js and Tailwind CSS.
 
 ## Features
 
