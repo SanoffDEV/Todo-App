@@ -1,17 +1,17 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { CheckCircle, Circle, Pencil, Trash2 } from "lucide-react";
+import { LucideRotateCcw, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/src/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/src/components/ui/card";
 import { motion } from "framer-motion";
 
-interface CrudProps {
+interface FinshedCrudProps {
   todoId: string;
 }
 
-export const Crud = ({ todoId }: CrudProps) => {
+export const FinshedCrud = ({ todoId }: FinshedCrudProps) => {
   const [isClickedDelete, setIsClickedDelete] = useState(false);
   const [isClickedFinished, setIsClickedFinished] = useState(false);
 
@@ -86,7 +86,7 @@ export const Crud = ({ todoId }: CrudProps) => {
           >
             <Card className="w-96 px-6 py-4 shadow-lg rounded-2xl bg-white ">
               <CardTitle className="text-lg font-semibold translate-y-3">
-                Mark this todo as done ?
+                Restore this todo ?
               </CardTitle>
               <CardContent className="mt-4 flex justify-center gap-4 translate-y-3">
                 <Button
@@ -115,13 +115,6 @@ export const Crud = ({ todoId }: CrudProps) => {
       <div className="flex items-center gap-4 mt-4 md:mt-0 md:ml-auto">
         <Button
           variant="ghost"
-          className="text-blue-500 hover:text-blue-600 transition"
-        >
-          <Pencil className="w-5 h-5" />
-        </Button>
-
-        <Button
-          variant="ghost"
           className="text-red-500 hover:text-red-600 transition"
           onClick={() => setIsClickedDelete(true)}
         >
@@ -133,7 +126,7 @@ export const Crud = ({ todoId }: CrudProps) => {
           className="text-green-500 hover:text-green-600 transition"
           onClick={() => setIsClickedFinished(true)}
         >
-          <CheckCircle className="w-5 h-5" />
+          <LucideRotateCcw className="w-5 h-5" />
         </Button>
       </div>
     </div>

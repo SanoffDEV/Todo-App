@@ -28,10 +28,6 @@ import {
   PopoverContent,
 } from "@/src/components/ui/popover";
 import { ToastAction } from "@radix-ui/react-toast";
-import { session } from "@/pages/api/auth/getServerSession";
-import { LoginButton } from "@/src/auth/LoginButton";
-
-import { prisma } from "@/src/lib/prisma";
 
 export type TodoFormProps = {
   defaultValues?: TodoType;
@@ -88,6 +84,25 @@ export function CreateTodoMenu(props: TodoFormProps) {
       });
     },
   });
+  const mutation2 = useMutation({
+    mutationFn: async (values: TodoType) => {
+      const response = await fetch("/api/post/create", {
+        method: "UPDATE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...values, date }),
+      });
+
+      console.log("Response status:", response.status);
+
+      if (!response.ok) {
+        throw new Error("Failed to create Todo");
+      }
+
+      return await response.json();
+    },
+  });
 
   return (
     <Card>
@@ -139,7 +154,10 @@ export function CreateTodoMenu(props: TodoFormProps) {
                   className="overflow-y-scroll scrollbar-none"
                   {...field}
                   value={field.value || ""}
-                  onChange={field.onChange}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    field.onChange(value);
+                  }}
                 />
               </FormItem>
             )}

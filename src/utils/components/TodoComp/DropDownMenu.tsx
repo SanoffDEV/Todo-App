@@ -2,7 +2,7 @@
 
 import { authConfig } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
-import { LogOut, Moon, Sun } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 import { Button } from "@/src/components/ui/button";
 
@@ -31,7 +31,7 @@ export async function DropDownMenu() {
         >
           <Avatar className="w-full h-full">
             <AvatarImage
-              className="w-full h-full rounded-full object-cover"
+              className="w-full h-full rounded-full object-cover "
               src={session?.user?.image ?? "/placeholder-avatar.png"} // Fallback image
               alt={session?.user?.name ?? "User Avatar"}
             />

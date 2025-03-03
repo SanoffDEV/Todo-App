@@ -5,7 +5,6 @@ import {
   CardTitle,
 } from "@/src/components/ui/card";
 import { authConfig } from "@/pages/api/auth/[...nextauth]";
-import { GithubButton } from "@/src/auth/GithubButton";
 import { GoogleButton } from "@/src/auth/GoogleButton";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -26,10 +25,9 @@ export default async function LoginCard() {
         </CardTitle>
         <CardContent className="p-6">
           <CardDescription className="text-center text-gray-600 mb-6">
-            Please login with your Google or Github account
+            Please login with your Google account
           </CardDescription>
           <GoogleButton />
-          <GithubButton />
         </CardContent>
       </Card>
     </div>

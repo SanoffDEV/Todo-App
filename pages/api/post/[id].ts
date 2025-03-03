@@ -8,12 +8,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "DELETE") {
-    const { id } = req.query; // ID depuis l'URL
+    const { id } = req.query;
 
-    // ✅ Passer req et res à getServerSession
     const session = await getServerSession(req, res, authConfig);
 
-    // Vérification de la session utilisateur
     if (!session || !session.user?.id) {
       return res.status(401).json({ message: "Unauthorized" });
     }

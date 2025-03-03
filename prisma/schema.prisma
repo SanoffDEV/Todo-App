@@ -31,13 +31,13 @@ model Todo {
   description String   @db.Text                  // Description illimitée
   hours       String   @db.VarChar(5)             // Format "HH:MM" pour les heures
   date        DateTime       
-  Done        Boolean                // Date et heure de la tâche
+  isDone      Boolean  @default(false)   
+  finishedAt  DateTime?          // Indique si la tâche est terminée
   userId      String                             // Identifiant de l'utilisateur associé
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Relation avec User
 
   createdAt   DateTime @default(now())           // Date de création
-  updatedAt   DateTime @updatedAt                // Mise à jour automatique
-
+  updatedAt   DateTime @updatedAt                // Mise à jour automatique       // Date de fin de la tâche
   @@index([userId])                              // Index pour des recherches rapides basées sur userId
 }
 

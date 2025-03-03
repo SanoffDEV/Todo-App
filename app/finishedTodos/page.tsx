@@ -1,36 +1,29 @@
-import { DropDownMenu } from "@/src/utils/components/TodoComp/DropDownMenu";
 import { authConfig } from "@/pages/api/auth/[...nextauth]";
 import { LoginButton } from "@/src/auth/LoginButton";
-import { getServerSession } from "next-auth";
-import { TodoDisplay } from "@/src/utils/components/TodoComp/TodoDisplay";
-import { prisma } from "@/src/lib/prisma";
-import { redirect } from "next/navigation";
+import { DropDownMenu } from "@/src/utils/components/TodoComp/DropDownMenu";
+import { FinishedTodo } from "@/src/utils/components/TodoComp/FinishedTodo";
 import { Sidebar } from "@/src/utils/components/TodoComp/Sidebar";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default async function Home() {
+export default async function FinishedTodos() {
   const session = await getServerSession(authConfig);
   if (!session) {
     redirect("/landing");
   }
-  const user = await prisma.user.findUnique({
-    where: { id: session?.user?.id },
-    include: { todos: true },
-  });
-  const finishedTodos = user?.todos.filter(
-    (todo: any) => todo.isDone === false
-  );
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 relative overflow-hidden">
       <header className="fixed top-5 right-5">
         <div>{session ? <DropDownMenu /> : <LoginButton />}</div>
       </header>
-      <div className="fixed left-5 top-1">
+      <header className="absolute top-5 right-5"></header>
+      <div className="fixed top-1   left-5">
         <Sidebar />
       </div>
 
       <main className="w-full max-w-4xl ">
         <section>
-          <TodoDisplay />
+          <FinishedTodo />
         </section>
       </main>
     </div>
