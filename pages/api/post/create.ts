@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth"; // Import correct de getSession
+import { getServerSession } from "next-auth";
 import { authConfig } from "../auth/[...nextauth]";
 import { prisma } from "@/src/lib/prisma";
 
@@ -16,7 +16,7 @@ export default async function handler(
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-    if (!name || !description || !date) {
+    if (!name || !description) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 

@@ -33,7 +33,6 @@ export default async function handler(
       return res.status(404).json({ message: "Tâche non trouvée" });
     }
 
-    // Inverser la valeur de isDone
     const updatedTodo = await prisma.todo.update({
       where: { id: todoId },
       data: { isDone: !todo.isDone, finishedAt: new Date() },

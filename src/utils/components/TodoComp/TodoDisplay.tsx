@@ -9,7 +9,7 @@ import { prisma } from "@/src/lib/prisma";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { Calendar, Clock } from "lucide-react";
 import { getServerSession } from "next-auth";
-import { Crud } from "./CrudBtn"; // Import Crud component
+import { Crud } from "./CrudBtn";
 
 export async function TodoDisplay() {
   const session = await getServerSession(authConfig);
@@ -18,7 +18,6 @@ export async function TodoDisplay() {
     return <p>Not authenticated</p>;
   }
 
-  // Récupérer l'utilisateur et ses tâches
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
     include: { todos: true },

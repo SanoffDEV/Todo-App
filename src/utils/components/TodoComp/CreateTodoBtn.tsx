@@ -16,7 +16,6 @@ export const CreateTodo = () => {
 
       {isMenuOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 p-4">
-          {/* Bouton de fermeture */}
           <span
             onClick={() => setIsMenuOpen(false)}
             className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white cursor-pointer hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-white"
@@ -28,7 +27,6 @@ export const CreateTodo = () => {
             />
           </span>
 
-          {/* Contenu de la modale */}
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md sm:max-w-lg">
             <CreateTodoMenu />
           </div>

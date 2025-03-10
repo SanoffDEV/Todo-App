@@ -30,7 +30,7 @@ model Todo {
   name        String   @db.VarChar(255)          // Nom limité à 255 caractères
   description String   @db.Text                  // Description illimitée
   hours       String   @db.VarChar(5)             // Format "HH:MM" pour les heures
-  date        DateTime       
+  date        DateTime @default(now())
   isDone      Boolean  @default(false)   
   finishedAt  DateTime?          // Indique si la tâche est terminée
   userId      String                             // Identifiant de l'utilisateur associé

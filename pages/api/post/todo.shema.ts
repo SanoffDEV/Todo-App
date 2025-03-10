@@ -8,6 +8,6 @@ export const todoSchema = z.object({
     .min(1, "Description is required")
     .max(100, "Description is too long"),
   hours: z.string().nullable().optional().default(""),
-  date: z.date().nullable(),
+  date: z.date(),
 });
 export type TodoType = z.infer<typeof todoSchema>;

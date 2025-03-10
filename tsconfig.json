@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "_component/CreateTodoMenu.jsx",
     "pages/api/post/todo.actions.ts",
-    "src/lib/safe.actions.ts"
+    "src/lib/safe.actions.ts",
+    "pages/api/post/[id].js"
   ],
   "exclude": ["node_modules"]
 }

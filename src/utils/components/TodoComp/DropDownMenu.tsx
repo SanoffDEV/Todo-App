@@ -32,7 +32,7 @@ export async function DropDownMenu() {
           <Avatar className="w-full h-full">
             <AvatarImage
               className="w-full h-full rounded-full object-cover "
-              src={session?.user?.image ?? "/placeholder-avatar.png"} // Fallback image
+              src={session?.user?.image ?? "/placeholder-avatar.png"}
               alt={session?.user?.name ?? "User Avatar"}
             />
             <AvatarFallback className="flex items-center justify-center w-full h-full rounded-full bg-gray-200 text-gray-700">

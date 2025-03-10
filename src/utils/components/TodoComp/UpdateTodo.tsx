@@ -1,4 +1,5 @@
-import * as React from "react";
+"use client";
+
 import { Button } from "@/src/components/ui/button";
 import {
   Card,
@@ -28,48 +29,84 @@ import {
   PopoverContent,
 } from "@/src/components/ui/popover";
 import { ToastAction } from "@radix-ui/react-toast";
+import { useEffect, useState } from "react";
 
 export type TodoFormProps = {
   defaultValues?: TodoType;
   TodoId?: string;
 };
 
-export function CreateTodoMenu(props: TodoFormProps) {
+export function UpdateTodoMenu({ todoId }: { todoId: string }) {
   const { toast } = useToast();
+  const [todoData, setTodoData] = useState<TodoType | null>(null);
+  const [date, setDate] = useState<Date | null>(null);
+
   const form = useZodForm({
     schema: todoSchema,
-    defaultValues: props.defaultValues,
+    defaultValues: {
+      name: todoData?.name || "",
+      description: todoData?.description || "",
+      hours: todoData?.hours || "",
+      date: todoData?.date || undefined,
+    },
   });
 
-  const [date, setDate] = React.useState<Date | null>(null);
+  useEffect(() => {
+    const fetchTodo = async () => {
+      try {
+        const response = await fetch(`/api/post/${todoId}`, { method: "GET" });
+        if (!response.ok) {
+          throw new Error("Failed to fetch todo");
+        }
+        const data = await response.json();
+        setTodoData(data);
+        form.setValue("name", data.name || "");
+        form.setValue("description", data.description || "");
+        form.setValue("hours", data.hours || "");
+        form.setValue("date", data.date || null);
+      } catch (error) {
+        console.error(error);
+        toast({
+          title: "Error",
+          description: "Failed to fetch todo data",
+          variant: "destructive",
+          duration: 1000,
+          action: <ToastAction altText="Close">Close</ToastAction>,
+        });
+      }
+    };
+
+    fetchTodo();
+  }, [todoId, form, toast]);
+
+  useEffect(() => {
+    if (todoData?.date) {
+      const parsedDate = new Date(todoData.date);
+      setDate(parsedDate);
+      form.setValue("date", parsedDate); // Mettre à jour la valeur de la date dans le formulaire
+    }
+  }, [todoData, form]);
 
   const mutation = useMutation({
     mutationFn: async (values: TodoType) => {
-      const response = await fetch("/api/post/create", {
-        method: "POST",
+      const response = await fetch(`/api/post/${todoId}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...values, date }),
+        body: JSON.stringify(values),
       });
 
-      console.log("Response status:", response.status);
-
       if (!response.ok) {
-        throw new Error("Failed to create Todo");
+        throw new Error("Failed to update todo");
       }
 
       return await response.json();
     },
-    onError: (error) => {
-      console.error("Error during mutation:", error);
-    },
     onSuccess: () => {
-      form.reset();
-      setDate(null);
       toast({
-        title: "Todo Created!",
-        description: "Your todo has been successfully created.",
+        title: "Todo Updated!",
+        description: "Your todo has been successfully updated.",
         duration: 1500,
         action: (
           <ToastAction
@@ -83,24 +120,44 @@ export function CreateTodoMenu(props: TodoFormProps) {
         ),
       });
     },
+    onError: (error) => {
+      console.error("Error updating todo:", error);
+      toast({
+        title: "Error",
+        description: "Failed to update todo",
+        variant: "destructive",
+        duration: 1000,
+        action: (
+          <ToastAction
+            altText="Close"
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Close
+          </ToastAction>
+        ),
+      });
+    },
   });
+
+  const handleSubmit = async (values: TodoType) => {
+    // Ne pas réinitialiser la date si elle n'a pas été modifiée
+    if (!values.date) {
+      values.date = todoData?.date ? new Date(todoData.date) : new Date();
+    }
+    await mutation.mutateAsync(values);
+  };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl font-bold">Create Todo</CardTitle>
-        <CardDescription>Create a new todo quickly.</CardDescription>
+        <CardTitle className="text-xl font-bold">Update Todo</CardTitle>
+        <CardDescription>Update your todo details.</CardDescription>
       </CardHeader>
       <CardContent>
-        <Form
-          form={form}
-          onSubmit={async (values) => {
-            await mutation.mutateAsync({
-              ...values,
-              date: date || new Date(),
-            });
-          }}
-        >
+        <Form form={form} onSubmit={async (values) => handleSubmit(values)}>
+          {/* Name Field */}
           <FormField
             control={form.control}
             name="name"
@@ -113,12 +170,20 @@ export function CreateTodoMenu(props: TodoFormProps) {
                   placeholder="Name of your Todo"
                   {...field}
                   value={field.value || ""}
-                  onChange={field.onChange}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    field.onChange(value);
+                    if (!value) {
+                      // Ne pas réinitialiser si la valeur est vide
+                      form.setValue("name", "");
+                    }
+                  }}
                 />
               </FormItem>
             )}
           />
 
+          {/* Description Field */}
           <FormField
             control={form.control}
             name="description"
@@ -131,18 +196,22 @@ export function CreateTodoMenu(props: TodoFormProps) {
                   maxLength={70}
                   id="description"
                   placeholder="Description of your Todo"
-                  className="overflow-y-scroll scrollbar-none"
                   {...field}
                   value={field.value || ""}
                   onChange={(e) => {
                     const value = e.target.value;
                     field.onChange(value);
+                    if (!value) {
+                      // Ne pas réinitialiser si la valeur est vide
+                      form.setValue("description", "");
+                    }
                   }}
                 />
               </FormItem>
             )}
           />
 
+          {/* Date Field */}
           <FormField
             control={form.control}
             name="date"
@@ -170,21 +239,21 @@ export function CreateTodoMenu(props: TodoFormProps) {
                       mode="single"
                       selected={date || undefined}
                       onSelect={(selectedDate) => {
+                        if (!selectedDate) return;
+
                         const currentDate = new Date();
-                        if (!selectedDate) {
-                          alert("No date selected");
-                          return;
-                        }
-                        if (selectedDate > currentDate) {
+                        currentDate.setHours(0, 0, 0, 0); // Fixer à minuit pour éviter les erreurs
+
+                        if (selectedDate >= currentDate) {
                           setDate(selectedDate);
-                          field.onChange(selectedDate);
+                          field.onChange(selectedDate); // Mettre à jour le formulaire
                         } else {
                           toast({
-                            title: "Error",
-                            description: "Date must be in the future",
-                            duration: 1000,
+                            title: "Erreur",
+                            description: "La date doit être dans le futur",
+                            duration: 2000,
                             action: (
-                              <ToastAction altText="Close">Close</ToastAction>
+                              <ToastAction altText="Fermer">Fermer</ToastAction>
                             ),
                           });
                         }
@@ -196,6 +265,7 @@ export function CreateTodoMenu(props: TodoFormProps) {
             )}
           />
 
+          {/* Hours Field */}
           <FormField
             control={form.control}
             name="hours"
@@ -209,7 +279,7 @@ export function CreateTodoMenu(props: TodoFormProps) {
                   id="hours"
                   className="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   {...field}
-                  value={field.value || ""}
+                  value={field.value || todoData?.hours || ""}
                   onChange={field.onChange}
                 />
               </FormItem>
@@ -217,7 +287,7 @@ export function CreateTodoMenu(props: TodoFormProps) {
           />
 
           <Button type="submit" className="mt-4 w-full" variant={"outline"}>
-            Create Todo
+            Update Todo
           </Button>
         </Form>
       </CardContent>

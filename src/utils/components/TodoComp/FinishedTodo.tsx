@@ -19,13 +19,11 @@ export async function FinishedTodo() {
     return <p>Not authenticated</p>;
   }
 
-  // Récupérer l'utilisateur et ses tâches terminées
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
     include: { todos: true },
   });
 
-  // Filtrer les tâches terminées
   const finishedTodos = user?.todos.filter((todo) => todo.isDone === true);
 
   const userInfo = await prisma.user.findUnique({
