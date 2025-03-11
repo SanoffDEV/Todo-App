@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import type { User } from "@prisma/client";
 
 import { getServerSession } from "next-auth";
 import { authConfig } from "./[...nextauth]";
