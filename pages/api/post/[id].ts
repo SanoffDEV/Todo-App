@@ -2,8 +2,6 @@ import { prisma } from "@/src/lib/prisma";
 import { getServerSession } from "next-auth/next";
 import { authConfig } from "@/pages/api/auth/[...nextauth]";
 import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
-import { session } from "../auth/getServerSession";
 
 export default async function handler(
   req: NextApiRequest,
@@ -43,6 +41,7 @@ export default async function handler(
         where: { id: req.query.id as string },
         data: { name, description, date, hours },
       });
+      console.log(updateTodo);
     } catch (error) {
       console.error("Error updating todo:", error);
       return res.status(500).json({

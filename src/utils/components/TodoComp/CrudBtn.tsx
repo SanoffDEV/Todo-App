@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useMutation } from "@tanstack/react-query";
-import { CheckCircle, Circle, Pencil, Trash2 } from "lucide-react";
+import { CheckCircle, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/src/components/ui/card";
 import { motion } from "framer-motion";
@@ -26,6 +26,7 @@ export function Crud({ todoId }: CrudProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ todoId }),
       });
+      console.log(response);
     },
     onSuccess: () => {
       window.location.reload();
@@ -39,6 +40,7 @@ export function Crud({ todoId }: CrudProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ todoId }),
       });
+      console.log(response);
     },
     onSuccess: () => {
       window.location.reload();

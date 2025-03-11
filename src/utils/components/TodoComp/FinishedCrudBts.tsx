@@ -22,6 +22,7 @@ export const FinshedCrud = ({ todoId }: FinshedCrudProps) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ todoId }),
       });
+      console.log(response);
     },
     onSuccess: () => {
       window.location.reload();
@@ -35,6 +36,7 @@ export const FinshedCrud = ({ todoId }: FinshedCrudProps) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ todoId }),
       });
+      console.log(response);
     },
     onSuccess: () => {
       window.location.reload();

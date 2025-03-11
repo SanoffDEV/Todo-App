@@ -2,7 +2,6 @@ import { prisma } from "@/src/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authConfig } from "../auth/[...nextauth]";
 import { NextApiRequest, NextApiResponse } from "next";
-import { any, date } from "zod";
 
 export default async function handler(
   req: NextApiRequest,
@@ -40,6 +39,8 @@ export default async function handler(
 
     return res.status(200).json(updatedTodo);
   } catch (error) {
-    return;
+    return res
+      .status(500)
+      .json({ message: "Error while updating the todo", error });
   }
 }

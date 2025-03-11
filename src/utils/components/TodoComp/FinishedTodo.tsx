@@ -11,6 +11,7 @@ import { getServerSession } from "next-auth";
 import { authConfig } from "@/pages/api/auth/[...nextauth]";
 import { prisma } from "@/src/lib/prisma";
 import { FinshedCrud } from "./FinishedCrudBts";
+import { log } from "console";
 
 export async function FinishedTodo() {
   const session = await getServerSession(authConfig);
@@ -30,6 +31,7 @@ export async function FinishedTodo() {
     where: { id: session.user.id },
     include: { todos: true },
   });
+  log(userInfo);
 
   return (
     <div className="flex flex-col items-center justify-center px-4 mt-24">

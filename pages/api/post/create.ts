@@ -30,10 +30,11 @@ export default async function handler(
           userId: session.user.id,
         },
       });
+      console.log(newTodo);
 
       return res.status(200).json({ message: "Todo created successfully" });
     } catch (error) {
-      return res.status(500).json({ message: "Failed to create Todo" });
+      return res.status(500).json({ message: "Failed to create Todo", error });
     }
   }
 }

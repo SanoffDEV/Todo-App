@@ -19,6 +19,7 @@ export default async function Home() {
   const finishedTodos = user?.todos.filter(
     (todo: any) => todo.isDone === false
   );
+  console.log(finishedTodos);
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 relative overflow-hidden">
       <header className="fixed top-5 right-5">
