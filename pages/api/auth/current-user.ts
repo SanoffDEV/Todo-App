@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-types */
+
 import type { Prisma } from "@prisma/client";
 
 type User = Prisma.UserGetPayload<{}>;
