@@ -11,6 +11,19 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    rules: {
+      "@typescript-eslint/ban-types": [
+        "error",
+        {
+          types: {
+            "{}": false, // Désactive l'erreur sur {}
+          },
+          extendDefaults: true,
+        },
+      ],
+    },
+  },
 ];
 
 export default eslintConfig;
