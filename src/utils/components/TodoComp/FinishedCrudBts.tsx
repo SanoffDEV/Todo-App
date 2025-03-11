@@ -111,7 +111,6 @@ export const FinshedCrud = ({ todoId }: FinshedCrudProps) => {
         </div>
       )}
 
-      {/* Boutons d'actions */}
       <div className="flex items-center gap-4 mt-4 md:mt-0 md:ml-auto">
         <Button
           variant="ghost"

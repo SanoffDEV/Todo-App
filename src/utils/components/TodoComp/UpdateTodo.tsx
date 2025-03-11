@@ -126,7 +126,7 @@ export function UpdateTodoMenu({ todoId }: { todoId: string }) {
         title: "Error",
         description: "Failed to update todo",
         variant: "destructive",
-        duration: 1000,
+        duration: 1500,
         action: (
           <ToastAction
             altText="Close"
@@ -142,7 +142,6 @@ export function UpdateTodoMenu({ todoId }: { todoId: string }) {
   });
 
   const handleSubmit = async (values: TodoType) => {
-    // Ne pas réinitialiser la date si elle n'a pas été modifiée
     if (!values.date) {
       values.date = todoData?.date ? new Date(todoData.date) : new Date();
     }
@@ -174,7 +173,6 @@ export function UpdateTodoMenu({ todoId }: { todoId: string }) {
                     const value = e.target.value;
                     field.onChange(value);
                     if (!value) {
-                      // Ne pas réinitialiser si la valeur est vide
                       form.setValue("name", "");
                     }
                   }}
@@ -183,7 +181,6 @@ export function UpdateTodoMenu({ todoId }: { todoId: string }) {
             )}
           />
 
-          {/* Description Field */}
           <FormField
             control={form.control}
             name="description"
@@ -202,7 +199,6 @@ export function UpdateTodoMenu({ todoId }: { todoId: string }) {
                     const value = e.target.value;
                     field.onChange(value);
                     if (!value) {
-                      // Ne pas réinitialiser si la valeur est vide
                       form.setValue("description", "");
                     }
                   }}
@@ -211,7 +207,6 @@ export function UpdateTodoMenu({ todoId }: { todoId: string }) {
             )}
           />
 
-          {/* Date Field */}
           <FormField
             control={form.control}
             name="date"
@@ -242,18 +237,18 @@ export function UpdateTodoMenu({ todoId }: { todoId: string }) {
                         if (!selectedDate) return;
 
                         const currentDate = new Date();
-                        currentDate.setHours(0, 0, 0, 0); // Fixer à minuit pour éviter les erreurs
+                        currentDate.setHours(0, 0, 0, 0);
 
                         if (selectedDate >= currentDate) {
                           setDate(selectedDate);
-                          field.onChange(selectedDate); // Mettre à jour le formulaire
+                          field.onChange(selectedDate);
                         } else {
                           toast({
-                            title: "Erreur",
-                            description: "La date doit être dans le futur",
-                            duration: 2000,
+                            title: "Error",
+                            description: "Date must be in the future",
+                            duration: 1500,
                             action: (
-                              <ToastAction altText="Fermer">Fermer</ToastAction>
+                              <ToastAction altText="Fermer">Close</ToastAction>
                             ),
                           });
                         }

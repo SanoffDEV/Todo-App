@@ -41,7 +41,6 @@ export async function TodoDisplay() {
                 key={todo.id}
                 className="flex flex-col md:flex-row items-center bg-white shadow-md rounded-lg p-4 md:p-6 h-auto md:max-h-36 md:min-h-24   w-full"
               >
-                {/* Titre + Description */}
                 <div className="flex-1 text-center md:text-left">
                   <CardTitle className="text-lg font-semibold">
                     {todo.name}
@@ -51,11 +50,9 @@ export async function TodoDisplay() {
                   </CardDescription>
                 </div>
 
-                {/* Séparateur en mode desktop */}
                 <Separator className="my-3 md:hidden" />
                 <Separator className="hidden md:block h-full mx-4" />
 
-                {/* Date & Heure */}
                 <CardContent
                   className={
                     todo.hours
@@ -78,7 +75,6 @@ export async function TodoDisplay() {
                   </div>
                 </CardContent>
 
-                {/* Pass todo.id to the Crud component */}
                 <Crud todoId={todo.id} />
               </Card>
             ))

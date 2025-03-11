@@ -57,11 +57,9 @@ export async function FinishedTodo() {
                   </CardDescription>
                 </div>
 
-                {/* Séparateur en mode desktop */}
                 <Separator className="my-3 md:hidden" />
                 <Separator className="hidden md:block h-full mx-4" />
 
-                {/* Date & Heure */}
                 <div className="flex flex-col">
                   <CardContent
                     className={
@@ -71,7 +69,7 @@ export async function FinishedTodo() {
                     }
                   >
                     <div className="flex items-center gap-2 pt-6">
-                      <span className="text-black ">To do the</span>
+                      <span className="text-black ">To be done the</span>
                       <Calendar className="w-4 h-4 text-gray-500" />
                       {new Date(todo.date).toLocaleDateString()}
                     </div>
@@ -103,7 +101,6 @@ export async function FinishedTodo() {
                   </CardFooter>
                 </div>
 
-                {/* Pass todo.id to the Crud component */}
                 <FinshedCrud todoId={todo.id} />
               </Card>
             ))}
