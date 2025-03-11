@@ -1,4 +1,6 @@
-import type { User } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
+
+type User = Prisma.UserGetPayload<{}>;
 
 import { getServerSession } from "next-auth";
 import { authConfig } from "./[...nextauth]";
