@@ -17,7 +17,7 @@ export default async function Home() {
     include: { todos: true },
   });
   const finishedTodos = user?.todos.filter(
-    (todo: any) => todo.isDone === false
+    (todo: { isDone: boolean }) => todo.isDone === false
   );
   console.log(finishedTodos);
   return (
