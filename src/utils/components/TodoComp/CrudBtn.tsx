@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useMutation } from "@tanstack/react-query";
-import { CheckCircle, Pencil, Trash2 } from "lucide-react";
+import { CheckCircle, Pencil, Trash2, X } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/src/components/ui/card";
 import { motion } from "framer-motion";
@@ -13,6 +13,7 @@ interface CrudProps {
 }
 
 export function Crud({ todoId }: CrudProps) {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isClickedDelete, setIsClickedDelete] = React.useState(false);
   const [isClickedFinished, setIsClickedFinished] = React.useState(false);
   const [isClickedUpdate, setIsClickedUpdate] = React.useState<false | true>(
@@ -27,6 +28,7 @@ export function Crud({ todoId }: CrudProps) {
         body: JSON.stringify({ todoId }),
       });
       console.log(response);
+      console.clear();
     },
     onSuccess: () => {
       window.location.reload();
@@ -133,7 +135,7 @@ export function Crud({ todoId }: CrudProps) {
       <div className="flex items-center gap-4 mt-4 md:mt-0 md:ml-auto">
         <Button
           variant="ghost"
-          className="text-blue-500 hover:text-blue-600 transition"
+          className="text-blue-500 hover:text-blue-600 transition "
           onClick={() => setIsClickedUpdate(true)}
         >
           <Pencil className="w-5 h-5" />

@@ -10,8 +10,8 @@ export const CreateTodo = () => {
   return (
     <div className="relative">
       <span className="flex gap-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-        <CirclePlus className=" text-base hover:shadow-xl transition-all duration-300 flex items-center gap-2 justify-center" />
-        Create Task
+        <CirclePlus className="text-base hover:shadow-xl transition-all duration-300 flex items-center gap-2 justify-center" />
+        <span className="hidden xl:inline">Create Task</span>
       </span>
 
       {isMenuOpen && (

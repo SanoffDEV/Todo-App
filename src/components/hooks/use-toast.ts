@@ -23,6 +23,7 @@ const actionTypes = {
 } as const;
 
 console.log(actionTypes);
+console.clear();
 
 let count = 0;
 

@@ -149,7 +149,7 @@ export function UpdateTodoMenu({ todoId }: { todoId: string }) {
   };
 
   return (
-    <Card>
+    <Card className="">
       <CardHeader>
         <CardTitle className="text-xl font-bold">Update Todo</CardTitle>
         <CardDescription>Update your todo details.</CardDescription>

@@ -17,12 +17,12 @@ export default async function FinishedTodos() {
         <div>{session ? <DropDownMenu /> : <LoginButton />}</div>
       </header>
       <header className="absolute top-5 right-5"></header>
-      <div className="fixed top-1   left-5">
+      <div className="fixed xl:left-5 -left-32 top-1">
         <Sidebar />
       </div>
 
       <main className="w-full max-w-4xl ">
-        <section>
+        <section className="  flex flex-col  items-center justify-end md:ml-0 ml-16  ">
           <FinishedTodo />
         </section>
       </main>

@@ -44,9 +44,12 @@ export const FinshedCrud = ({ todoId }: FinshedCrudProps) => {
   });
 
   return (
-    <div>
+    <div className="-translate-y-3">
       {isClickedDelete && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50"
+          style={{ zIndex: 100 }}
+        >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -113,7 +116,7 @@ export const FinshedCrud = ({ todoId }: FinshedCrudProps) => {
         </div>
       )}
 
-      <div className="flex items-center gap-4 mt-4 md:mt-0 md:ml-auto">
+      <div className="flex items-center gap-4  md:mt-0 md:ml-auto">
         <Button
           variant="ghost"
           className="text-red-500 hover:text-red-600 transition"

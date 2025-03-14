@@ -31,10 +31,10 @@ export async function FinishedTodo() {
     where: { id: session.user.id },
     include: { todos: true },
   });
-  log(userInfo);
 
   return (
     <div className="flex flex-col items-center justify-center px-4 mt-24">
+      <div className="hidden w-0 h-0">{userInfo?.todos.length}</div>
       {finishedTodos?.length === 0 ? (
         <div className="text-center">
           <h2 className="text-lg font-bold text-gray-700">
@@ -47,7 +47,7 @@ export async function FinishedTodo() {
             {finishedTodos?.map((todo) => (
               <Card
                 key={todo.id}
-                className="flex flex-col md:flex-row items-center bg-white shadow-md rounded-lg p-4 md:p-6 h-auto md:max-h-36 md:min-h-24   w-full"
+                className="flex flex-col md:flex-row max-w-80 md:max-w-full items-center bg-white shadow-md rounded-lg pt-4 md:p-6 h-auto  md:min-h-24  w-full max-h-80"
               >
                 {/* Titre + Description */}
                 <div className="flex-1 text-center md:text-left">
@@ -58,20 +58,14 @@ export async function FinishedTodo() {
                     {todo.description}
                   </CardDescription>
                 </div>
-
-                <Separator className="my-3 md:hidden" />
-                <Separator className="hidden md:block h-full mx-4" />
-
-                <div className="flex flex-col">
+                <div className="flex flex-col ">
                   <CardContent
                     className={
-                      todo.hours
-                        ? "flex flex-col md:flex-row items-center gap-2 md:gap-4 text-gray-700 text-sm"
-                        : "flex flex-col md:flex-row items-center gap- md:gap-[70px] text-gray-700 text-sm"
+                      "flex flex-row items-center gap-2 md:gap-4 text-gray-700 text-sm"
                     }
                   >
                     <div className="flex items-center gap-2 pt-6">
-                      <span className="text-black ">To be done the</span>
+                      <span className="text-black ">To do the</span>
                       <Calendar className="w-4 h-4 text-gray-500" />
                       {new Date(todo.date).toLocaleDateString()}
                     </div>
