@@ -1,6 +1,11 @@
-import type { Prisma } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
-type User = Prisma.UserGetPayload<true>;
+const prisma = new PrismaClient();
+type User = {
+  id: string;
+  name: string | null;
+  email: string | null;
+};
 
 import { getServerSession } from "next-auth";
 import { authConfig } from "./[...nextauth]";
