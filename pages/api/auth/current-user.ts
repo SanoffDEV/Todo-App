@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-types */
-
 import type { Prisma } from "@prisma/client";
 
-type User = Prisma.UserGetPayload<{}>;
+type User = Prisma.UserGetPayload<true>;
 
 import { getServerSession } from "next-auth";
 import { authConfig } from "./[...nextauth]";
