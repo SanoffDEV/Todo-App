@@ -3,7 +3,6 @@
 import { CheckCircle, ClipboardList } from "lucide-react";
 import { CreateTodo } from "./CreateTodoBtn";
 import { useRouter } from "next/navigation";
-import { set } from "date-fns";
 
 export const Sidebar = () => {
   const handleClick = () => {

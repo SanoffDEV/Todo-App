@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useMutation } from "@tanstack/react-query";
-import { CheckCircle, Pencil, Trash2, X } from "lucide-react";
+import { CheckCircle, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/src/components/ui/card";
 import { motion } from "framer-motion";
@@ -19,6 +19,8 @@ export function Crud({ todoId }: CrudProps) {
   const [isClickedUpdate, setIsClickedUpdate] = React.useState<false | true>(
     false
   );
+  console.log(setIsMenuOpen, isMenuOpen);
+  console.clear();
 
   const mutationUpdateStatus = useMutation({
     mutationFn: async (todoId: string) => {

@@ -5,13 +5,11 @@ import {
   CardFooter,
   CardTitle,
 } from "@/src/components/ui/card";
-import { Separator } from "@radix-ui/react-dropdown-menu";
 import { Calendar, Clock } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { authConfig } from "@/pages/api/auth/[...nextauth]";
 import { prisma } from "@/src/lib/prisma";
 import { FinshedCrud } from "./FinishedCrudBts";
-import { log } from "console";
 
 export async function FinishedTodo() {
   const session = await getServerSession(authConfig);
