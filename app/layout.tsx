@@ -4,6 +4,7 @@ import "./globals.css";
 import { PropsWithChildren } from "react";
 import { Toaster } from "@/src/components/ui/toaster";
 import { Providers } from "./providers";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export type ProviderProps = PropsWithChildren;
 const geistSans = Geist({
@@ -29,6 +30,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <SpeedInsights />
       <body
         className={`${geistSans.variable} font-sans ${geistMono.variable} antialiased  `}
       >
