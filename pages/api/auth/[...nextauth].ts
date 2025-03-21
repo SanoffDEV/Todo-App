@@ -1,12 +1,12 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/src/lib/prisma";
-import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 
 // Vérifie les variables d’environnement
-if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
   throw new Error(
-    "Les variables GOOGLE_CLIENT_ID ou GOOGLE_CLIENT_SECRET ne sont pas définies."
+    "Les variables GITHUB_CLIENT_ID ou GITHUB_CLIENT_SECRET ne sont pas définies."
   );
 }
 
@@ -20,9 +20,9 @@ if (!process.env.NEXTAUTH_SECRET) {
 
 export const authConfig = {
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
       authorization: {
         params: {
           scope: process.env.GOOGLE_SCOPE || "openid email profile",

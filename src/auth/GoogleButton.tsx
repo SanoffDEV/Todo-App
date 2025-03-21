@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 
 export function GoogleButton() {
   const handleLogin = async () => {
-    await signIn("google");
+    await signIn("github");
   };
 
   return (
