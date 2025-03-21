@@ -15,8 +15,8 @@ export function GithubButton() {
       className="mb-3 flex items-center justify-center w-full gap-2 bg-gray-900 hover:bg-gray-800 text-white rounded-md py-2"
     >
       <Image
-        src="/google.svg"
-        alt="google"
+        src="/github.svg"
+        alt="githubLogo"
         width={48}
         height={48}
         className="w-6 h-6"
