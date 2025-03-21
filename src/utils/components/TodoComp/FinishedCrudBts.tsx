@@ -44,19 +44,16 @@ export const FinshedCrud = ({ todoId }: FinshedCrudProps) => {
   });
 
   return (
-    <div className="-translate-y-3">
+    <div>
       {isClickedDelete && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50"
-          style={{ zIndex: 100 }}
-        >
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <Card className="w-96 px-6 py-4 shadow-lg rounded-2xl bg-white ">
+            <Card className="w-96 px-6 py-4 shadow-lg rounded-2xl bg-white">
               <CardTitle className="text-lg font-semibold translate-y-3">
                 Are you sure you want to delete this todo ?
               </CardTitle>
@@ -89,7 +86,7 @@ export const FinshedCrud = ({ todoId }: FinshedCrudProps) => {
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <Card className="w-96 px-6 py-4 shadow-lg rounded-2xl bg-white ">
+            <Card className="w-96 px-6 py-4 shadow-lg rounded-2xl bg-white">
               <CardTitle className="text-lg font-semibold translate-y-3">
                 Restore this todo ?
               </CardTitle>
@@ -116,7 +113,7 @@ export const FinshedCrud = ({ todoId }: FinshedCrudProps) => {
         </div>
       )}
 
-      <div className="flex items-center gap-4  md:mt-0 md:ml-auto">
+      <div className="flex items-center gap-4 mt-4 md:mt-0 md:ml-auto">
         <Button
           variant="ghost"
           className="text-red-500 hover:text-red-600 transition"
