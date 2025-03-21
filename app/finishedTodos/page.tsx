@@ -22,7 +22,7 @@ export default async function FinishedTodos() {
       </div>
 
       <main className="w-full max-w-4xl ">
-        <section className="  flex flex-col  items-center justify-end md:ml-0 ml-6  ">
+        <section className="flex flex-col md:ml-0 ml-6  ">
           <FinishedTodo />
         </section>
       </main>
