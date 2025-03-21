@@ -13,7 +13,7 @@ export const Sidebar = () => {
   };
   const router = useRouter();
   return (
-    <div className="relative w-80 h-screen flex flex-col items-center text-white py-10 mb-14">
+    <div className="relative w-80 h-screen flex flex-col items-center text-white py-10 ">
       <div className="flex flex-col items-center flex-grow justify-center">
         <div className="text-black cursor-pointer hover:transition-all duration-300 ">
           <CreateTodo />
