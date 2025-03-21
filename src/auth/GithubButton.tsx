@@ -20,6 +20,7 @@ export function GithubButton() {
         width={48}
         height={48}
         className="w-6 h-6"
+        color="white"
       />
       Login with Github
     </Button>
