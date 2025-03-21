@@ -27,7 +27,7 @@ export const CreateTodo = () => {
             />
           </span>
 
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md sm:max-w-lg">
+          <div className="rounded-lg shadow-lg p-6 w-full max-w-md sm:max-w-lg">
             <CreateTodoMenu />
           </div>
         </div>

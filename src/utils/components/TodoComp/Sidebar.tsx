@@ -20,7 +20,7 @@ export const Sidebar = () => {
         </div>
       </div>
 
-      <div className="xl:absolute xl:top-[35%] xl:left-1/2 xl:-translate-x-1/2 xl:w-[80%] xl:border-t xl:border-gray-300"></div>
+      <div className="xl:absolute xl:top-[20%] xl:left-1/2 xl:-translate-x-1/2 xl:w-[80%] xl:border-t xl:border-gray-300"></div>
 
       <div
         className="flex flex-col items-center flex-grow justify-center text-black cursor-pointer gap-2 hover:text-blue-500 hover:transition-all duration-300"
@@ -30,7 +30,7 @@ export const Sidebar = () => {
         <span className="hidden xl:inline">My Tasks</span>
       </div>
 
-      <div className="xl: xl:absolute xl:top-[65%] xl:left-1/2 xl:-translate-x-1/2 xl:w-[80%] xl:border-t xl:border-gray-300"></div>
+      <div className="xl: xl:absolute xl:top-[50%] xl:left-1/2 xl:-translate-x-1/2 xl:w-[80%] xl:border-t xl:border-gray-300"></div>
 
       <div
         className="flex flex-col items-center flex-grow justify-center text-black cursor-pointer gap-2 hover:text-green-500 hover:transition-all duration-300"
