@@ -89,7 +89,7 @@ export async function FinishedTodo() {
                         <Clock className="w-4 h-4 text-gray-500 ml-2" />
                         {todo.finishedAt === null
                           ? ""
-                          : todo.finishedAt.toLocaleTimeString().slice(0, 5)}
+                          : todo.finishedAt.toLocaleTimeString().slice(0, 4)}
                       </div>
                     )}
                   </CardFooter>

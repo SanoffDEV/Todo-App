@@ -172,7 +172,14 @@ export function CreateTodoMenu(props: TodoFormProps) {
                       onSelect={(selectedDate) => {
                         const currentDate = new Date();
                         if (!selectedDate) {
-                          alert("No date selected");
+                          toast({
+                            title: "Error",
+                            description: "Date must be selected",
+                            duration: 1000,
+                            action: (
+                              <ToastAction altText="Close">Close</ToastAction>
+                            ),
+                          });
                           return;
                         }
                         if (selectedDate > currentDate) {
