@@ -26,12 +26,12 @@ export default async function Home() {
       <header className="fixed top-5 right-5">
         <div>{session ? <DropDownMenu /> : <LoginButton />}</div>
       </header>
-      <div className="fixed xl:left-4 -left-32 xl:bottom-6">
+      <div className="fixed xl:left-4 -left-32 xl:bottom-7">
         <Sidebar />
       </div>
 
       <main className="w-full max-w-4xl ">
-        <section className=" flex flex-col  items-center justify-end md:ml-0 ml-16 ">
+        <section className=" flex flex-col  items-center justify-end md:ml-0 ml-8  ">
           <TodoDisplay />
         </section>
       </main>
