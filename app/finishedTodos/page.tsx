@@ -17,7 +17,7 @@ export default async function FinishedTodos() {
         <div>{session ? <DropDownMenu /> : <LoginButton />}</div>
       </header>
       <header className="absolute top-5 right-5"></header>
-      <div className="fixed xl:left-5 -left-32 bottom-12">
+      <div className="fixed xl:left-5 -left-32 bottom-9">
         <Sidebar />
       </div>
 
