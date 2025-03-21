@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "../components/ui/button";
 import { signIn } from "next-auth/react";
 
-export function GoogleButton() {
+export function GithubButton() {
   const handleLogin = async () => {
     await signIn("github");
   };
@@ -21,7 +21,7 @@ export function GoogleButton() {
         height={48}
         className="w-6 h-6"
       />
-      Login with Google
+      Login with Github
     </Button>
   );
 }
