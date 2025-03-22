@@ -51,7 +51,8 @@ export function Crud({ todoId }: CrudProps) {
     },
   });
   const handleClick = () => {
-    setIsClickedUpdate(false), window.location.reload();
+    setIsClickedUpdate(false);
+    window.location.reload();
   };
 
   return (
