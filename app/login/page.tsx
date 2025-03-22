@@ -8,6 +8,7 @@ import { authConfig } from "@/pages/api/auth/[...nextauth]";
 import { GithubButton } from "@/src/auth/GithubButton";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { GoogleButton } from "@/src/auth/GoogleButton";
 
 export default async function LoginCard() {
   const session = await getServerSession(authConfig);
@@ -28,6 +29,7 @@ export default async function LoginCard() {
             Please login with your Github account
           </CardDescription>
           <GithubButton />
+          <GoogleButton />
         </CardContent>
       </Card>
     </div>
