@@ -19,7 +19,7 @@ import {
   FormLabel,
   useZodForm,
 } from "@/src/components/ui/form";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, X } from "lucide-react";
 import { format } from "date-fns";
 import { useMutation } from "@tanstack/react-query";
 import { todoSchema, TodoType } from "@/pages/api/post/todo.shema";
@@ -287,5 +287,13 @@ export function UpdateTodoMenu({ todoId }: { todoId: string }) {
         </Form>
       </CardContent>
     </Card>
+  );
+}
+
+export function CloseUpdate() {
+  return (
+    <div>
+      <X className=" h-8 w-8 absolute top-4 right-4 sm:top-6 sm:right-6 text-white cursor-pointer hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-white" />
+    </div>
   );
 }

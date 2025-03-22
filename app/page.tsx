@@ -26,7 +26,7 @@ export default async function Home() {
       <header className="fixed top-5 right-5">
         <div>{session ? <DropDownMenu /> : <LoginButton />}</div>
       </header>
-      <div className="fixed xl:left-4 -left-32 -bottom-5">
+      <div className="fixed xl:left-4  left-2 ">
         <Sidebar />
       </div>
 

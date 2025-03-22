@@ -6,7 +6,7 @@ import { CheckCircle, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/src/components/ui/card";
 import { motion } from "framer-motion";
-import { UpdateTodoMenu } from "./UpdateTodo";
+import { UpdateTodoMenu, CloseUpdate } from "./UpdateTodo";
 
 interface CrudProps {
   todoId: string;
@@ -50,6 +50,9 @@ export function Crud({ todoId }: CrudProps) {
       window.location.reload();
     },
   });
+  const handleClick = () => {
+    setIsClickedUpdate(false), window.location.reload();
+  };
 
   return (
     <div>
@@ -121,13 +124,20 @@ export function Crud({ todoId }: CrudProps) {
         </div>
       )}
       {isClickedUpdate && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-xs z-50">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
+            <div
+              className="right-3 top-3 absolute"
+              onClick={() => handleClick()}
+            >
+              <CloseUpdate />
+            </div>
+
             <UpdateTodoMenu todoId={todoId} />
           </motion.div>
         </div>
